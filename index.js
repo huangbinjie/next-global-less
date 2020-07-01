@@ -25,7 +25,7 @@ module.exports = ({ globalPath, webpack, ...nextConfig } = {}) => ({
     ).options.modules = false
 
     config.module.rules.push({
-      test: new RegExp(escapePath(globalPath)),
+      test: globalPath,
       use: ignoreGlobalLessLoaders
     })
 
@@ -36,7 +36,3 @@ module.exports = ({ globalPath, webpack, ...nextConfig } = {}) => ({
     return config
   }
 })
-
-function escapePath(path) {
-  return path.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&').replace(/-/g, '\\x2d')
-}
